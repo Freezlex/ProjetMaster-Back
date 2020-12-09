@@ -11,7 +11,14 @@ module.exports = class Server {
     async core(database, chemin){
         this.database = await database.init(chemin)
 
-        this.app.use(bodyParser.urlencoded({ extended: false })).use(bodyParser.json())
+        this.app
+            .use(bodyParser.urlencoded({ extended: false }))
+            .use(bodyParser.json())
+            .use(function(req, res, next) {
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        })
 
         let routes = require('require-all')({
             dirname: await path.join(__dirname, "routes"),
