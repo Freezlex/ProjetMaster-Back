@@ -8,7 +8,6 @@ module.exports = class Database {
             host: process.env.SQL_HOST,
             port: process.env.SQL_PORT,
             dialect: 'mysql',
-            logging: log => console.log(log),
             define: {
                 timestamps: false
             },

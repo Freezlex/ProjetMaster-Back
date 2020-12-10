@@ -12,17 +12,20 @@ module.exports = class SearchRoute{
     init(){
         router
             .post('', async(req, res,next) => {
+
                 let searchString = await this.purifyString(req.body);
                 let searchDate = await this.purifyDate(req.body);
 
-                console.log(searchDate)
+
+                if(!searchString && !searchDate['min'] && !searchDate['max'])return res.json({err: null, res: await this.models.document.findAll()});
+                if(searchString)searchString = await searchString.join(" ");
 
                 let results = await this.models.document.findAll({
                     where: {
                         [Op.or]: {
-                            sujet: {[Op.like]: `${await searchString.join(" ")}`},
-                            auteur: {[Op.like]: `${await searchString.join(' ')}`},
-                            type: {[Op.like]: `${await searchString.join(' ')}`},
+                            sujet: {[Op.like]: searchString},
+                            auteur: {[Op.like]: searchString},
+                            type: {[Op.like]: searchString},
                             date: { [Op.between]: [+searchDate['min'], +searchDate['max']]},
                             date_max: { [Op.between]: [+searchDate['min'], +searchDate['max']]}
                         }

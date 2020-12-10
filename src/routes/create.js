@@ -43,7 +43,7 @@ module.exports = class CreateRoute{
                         auteur: req.body.auteur,
                         type: req.body.type,
                         discipline_id: req.body['discipline_id'],
-                        specialisteId: req.body['specialiste_id'],
+                        specialiste_id: req.body['specialiste_id'],
                         localisation_id: req.body['localisation_id']})
                     res.json({res: result, error: null})
                 }catch (e){

@@ -20,10 +20,6 @@ module.exports = class specialist extends Sequelize.Model{
             email: {
                 type: Sequelize.STRING(255),
                 allowNull: false
-            },
-            discipline_id:{
-                type: Sequelize.INTEGER,
-                allowNull: false
             }
         }, {
             sequelize

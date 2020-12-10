@@ -29,6 +29,11 @@ module.exports = class Server {
             this.app.use(route.defaultPath, route.init());
         }
 
+        this.app.use('*', async (req, res) => {
+            console.log(req);
+            res.status(404).json({err: `${req.baseUrl} route don't exist`, res: null});
+        })
+
         this.app.listen(this.port)
     }
 }

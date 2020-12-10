@@ -28,14 +28,6 @@ module.exports = class document extends Sequelize.Model{
             type: {
                 type: Sequelize.STRING,
                 allowNull: false
-            },
-            discipline_id: {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            localisation_id: {
-                type: Sequelize.INTEGER,
-                allowNull: false
             }
         }, {
             sequelize
