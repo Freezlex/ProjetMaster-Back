@@ -34,6 +34,10 @@ module.exports = class SearchRoute{
                 return res.json({res: results, err: null});
 
         })
+            .get('/avance', async (req, res, next) => {
+                let result = await this.models.document.findAll()
+                res.json({error: null, res: result});
+            })
         return router;
     }
 
